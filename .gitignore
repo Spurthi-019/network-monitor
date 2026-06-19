@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+
+# Database
+database/*.db
+database/test_*.db
+
+# Logs
+logs/*.log
+
+# Environment
+.env
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+desktop.ini
