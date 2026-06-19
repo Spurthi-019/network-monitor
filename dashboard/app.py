@@ -6,6 +6,15 @@ import time
 import sys
 import os
 
+
+
+# Use environment variable for API URL
+# Falls back to localhost for local development
+API_BASE = os.getenv(
+    "API_BASE_URL",
+    "http://localhost:8000"
+)
+
 sys.path.insert(0, os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..")
 ))
