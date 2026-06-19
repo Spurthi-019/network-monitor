@@ -63,48 +63,38 @@ This system monitors multiple network devices **simultaneously** and automatical
 
 ---
 
-## 🏗️ System Architecture
+## 🏗️ Detailed Architecture
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Network Devices                       │
-│      google.com │ github.com │ 8.8.8.8 │ 1.1.1.1        │
-└────────────────────────┬────────────────────────────────┘
-                         │  ping / TCP socket check
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│           Monitoring Engine  (Phase 2 + 3)               │
-│   Socket Layer → Latency → Packet Loss → Threading       │
-│   All devices checked simultaneously via threads         │
-└────────────────────────┬────────────────────────────────┘
-                         │  raw results
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│           Diagnostic Engine  (Phase 5)                   │
-│   Rules: offline? high latency? packet loss?             │
-│   Output: severity + recommendation + health score       │
-└────────────────────────┬────────────────────────────────┘
-                         │  metrics + alerts
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│              SQLite Database  (Phase 7)                  │
-│      devices table │ metrics table │ alerts table        │
-└──────────┬──────────────────────────────────────────────┘
-           │                          │
-           ▼                          ▼
-┌─────────────────────┐   ┌──────────────────────────────┐
-│   FastAPI Backend   │   │     Streamlit Dashboard       │
-│   (Phase 6)         │   │     (Phase 8)                 │
-│                     │   │                               │
-│  GET  /devices      │   │  ⚡ RUN CHECK button          │
-│  POST /devices      │   │  🔴 WORST CASE simulation     │
-│  POST /monitor      │   │  🟢 BEST CASE simulation      │
-│  GET  /metrics      │   │  Latency timeline chart       │
-│  GET  /status       │   │  Packet loss bars             │
-│  GET  /alerts       │   │  Health score donut           │
-│                     │   │  Uptime per device            │
-│  Deployed: Railway  │   │  Deployed: Streamlit Cloud    │
-└─────────────────────┘   └──────────────────────────────┘
+```mermaid
+flowchart LR
+
+    subgraph TARGETS["🌐 Network Devices"]
+        G["google.com"]
+        GH["github.com"]
+        D1["8.8.8.8"]
+        D2["1.1.1.1"]
+    end
+
+    subgraph CORE["⚡ Monitoring Platform"]
+        MON["Monitoring Engine"]
+        DIAG["Diagnostic Engine"]
+        DB[("SQLite")]
+    end
+
+    subgraph APP["🚀 Application Layer"]
+        API["FastAPI"]
+        UI["Streamlit"]
+    end
+
+    TARGETS -->|"Socket Checks"| MON
+    MON -->|"Latency & Loss"| DIAG
+    DIAG -->|"Metrics"| DB
+
+    UI -->|"REST API"| API
+    API -->|"Run Check"| MON
+    API --> DB
+
+    DIAG -->|"Alerts"| UI
 ```
 
 ---
