@@ -11,7 +11,7 @@
 
 **A real-time network monitoring system that tracks latency, packet loss, and device health across multiple devices simultaneously — with automated diagnostics, REST API, and live dashboard.**
 
-[🚀 Live API](https://web-production-990d4.up.railway.app) • [📖 Swagger Docs](https://web-production-990d4.up.railway.app/docs) • [📊 Live Dashboard](https://network-monitor-019.streamlit.app)
+[🚀 Live API](https://web-production-990d4.up.railway.app) • [📖 Swagger Docs](https://web-production-990d4.up.railway.app/docs) 
 
 </div>
 
