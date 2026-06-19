@@ -24,7 +24,7 @@
 
 <!-- SCREENSHOT 1: Paste your dashboard overview screenshot here -->
 <!-- To add: Click Edit → then drag and drop your screenshot image here -->
-![Dashboard Overview](screenshots/dashboard-overview.png)
+
 > Dark pink/purple themed real-time dashboard showing AVG RTT, packet loss, health score, device status, latency charts, and alerts panel — all populated from live network checks.
 
 ### Network Degradation vs Recovery
@@ -38,7 +38,7 @@
 
 <!-- SCREENSHOT 2: Paste your worst/best case screenshot here -->
 <!-- To add: Click Edit → then drag and drop your screenshot image here -->
-![Worst vs Best Case](screenshots/worst-best-case.png)
+
 > Left: After clicking 🔴 WORST CASE — latency spikes to 400-600ms, packet loss jumps to 20-45%, health score drops, donut turns red.
 > Right: After clicking 🟢 BEST CASE — latency recovers to 5-10ms, packet loss 0%, health score back to 100.
 
